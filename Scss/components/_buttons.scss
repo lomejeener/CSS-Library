@@ -1,0 +1,46 @@
+@use "../variables";
+@use "../function";
+@use "sass:color";
+
+@mixin btn($bg-color: #e2e2e2) {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  padding: variables.$base-padding variables.$base-padding * 2;
+  border-radius: variables.$base-border-radius;
+  background: $bg-color;
+}
+
+.btn {
+  @include btn();
+}
+
+@each $key, $val in variables.$color {
+  .btn-#{$key} {
+    @include btn($val);
+
+    &:hover {
+      background: color.scale($val, $lightness: 5%);
+    }
+  }
+
+  .btn-outlined-#{$key} {
+    @include btn(white);
+    border: variables.$base-border-thickness solid $val;
+
+    &:hover {
+      background: $val;
+    }
+  }
+
+  .btn-complement-#{$key} {
+    @include btn($val);
+    color: function.light-comp($val);
+
+    &:hover {
+      background: function.light-comp($val);
+      color: $val;
+    }
+  }
+}

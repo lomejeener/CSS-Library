@@ -1,0 +1,88 @@
+@use "sass:math";
+@use "breakpoints";
+
+$gridColumns: 12 !default;
+
+$grid-gap: (
+  "0": 0,
+  "1": 0.75rem,
+  "2": 1.5rem,
+  "3": 2rem,
+) !default;
+
+//container for centering the whole page
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  margin: 0 5rem;
+}
+
+//it's like flex row but for css libraries like bootstrap
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+//column classes
+@include breakpoints.xs {
+  @for $i from 1 through 12 {
+    .col-#{$i}-xs {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+@include breakpoints.s {
+  @for $i from 1 through 12 {
+    .col-#{$i}-s {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+@include breakpoints.md {
+  @for $i from 1 through 12 {
+    .col-#{$i}-md {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+@include breakpoints.lg {
+  @for $i from 1 through 12 {
+    .col-#{$i}-lg {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+@include breakpoints.xl {
+  @for $i from 1 through 12 {
+    .col-#{$i}-xl {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+@include breakpoints.xxl {
+  @for $i from 1 through 12 {
+    .col-#{$i}-xxl {
+      width: math.div($i * 100%, $gridColumns);
+    }
+  }
+}
+
+//gap
+@each $key, $val in $grid-gap {
+  .gap-#{$key} > * {
+    margin: $val;
+  }
+
+  .gap-#{$key} {
+    margin: -$val;
+  }
+}

@@ -1,0 +1,77 @@
+@use "breakpoints";
+@use "utility";
+
+@each $key, $val in breakpoints.$breakpoint {
+  @each $subKey, $subVal in utility.$utilities {
+    $subLowKey: map-get($subVal, "prefix");
+    $subLowVal: map-get($subVal, "values");
+
+    @each $minorKey, $minorVal in $subLowVal {
+      @if $minorKey == "default" {
+        @if $key== "xs" {
+          .#{$subLowKey}-#{$key} {
+            @include breakpoints.xs {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "s" {
+          .#{$subLowKey}-#{$key} {
+            @include breakpoints.s {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "md" {
+          .#{$subLowKey}-#{$key} {
+            @include breakpoints.md {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "lg" {
+          .#{$subLowKey}-#{$key} {
+            @include breakpoints.lg {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else {
+          .#{$subLowKey}-xl {
+            @include breakpoints.xl {
+              #{$subKey}: $minorVal;
+            }
+          }
+        }
+      } @else {
+        @if $key== "xs" {
+          .#{$subLowKey}-#{$minorKey}-#{$key} {
+            @include breakpoints.xs {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "s" {
+          .#{$subLowKey}-#{$minorKey}-#{$key} {
+            @include breakpoints.s {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "md" {
+          .#{$subLowKey}-#{$minorKey}-#{$key} {
+            @include breakpoints.md {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else if $key== "lg" {
+          .#{$subLowKey}-#{$minorKey}-#{$key} {
+            @include breakpoints.lg {
+              #{$subKey}: $minorVal;
+            }
+          }
+        } @else {
+          .#{$subLowKey}-#{$minorKey}-xl {
+            @include breakpoints.xl {
+              #{$subKey}: $minorVal;
+            }
+          }
+        }
+      }
+    }
+  }
+}
